@@ -9,10 +9,9 @@ import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
 class MainHook : IXposedHookLoadPackage {
-    @Throws(Throwable::class)
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         EzXHelperInit.initHandleLoadPackage(lpparam)
-        if (lpparam.packageName.equals("com.broaddeep.discipline")) {
+        if (lpparam.packageName == "com.broaddeep.discipline") {
             findMethod("com.stub.StubApp") {
                 name == "a"
             }.hookAfter {
